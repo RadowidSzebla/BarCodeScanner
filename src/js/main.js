@@ -17,20 +17,27 @@ if ('serviceWorker' in navigator) {
 // place your code below
 
 const input = document.querySelector('.input--js');
-const image = document.querySelector('.image--js')
-
+const image = document.querySelector('.image--js');
+const label = document.querySelector('.image__label--js');
 const buttonLoad = document.querySelector('.buttonLoad--js');
+
 function handleClickLoad(){
   //console.log(input.value)
   //console.log(image.src)
-  if (input.value == "lm") {
-    image.src="assets/img/logoLM.jpg"
+  if (input.value!=""){
+    if (input.value == "lm") {
+      image.src = "assets/img/logoLM.jpg"
+      label.innerHTML = input.value;
+    }
+    else if (input.value == "piws") {
+      image.src = "assets/img/logoPiws.jpg"
+      label.innerHTML = input.value;
+    }
+    else {
+      image.src = "assets/img/no-pictures.svg"
+      label.innerHTML = "nie znaleziono rysunku";
+    }
+    input.value = "";
   }
-  else if (input.value == "piws") {
-    image.src="assets/img/logoPiws.jpg"
-  }
-  else {image.src="assets/img/no-pictures.svg"}
 }
 buttonLoad.addEventListener('click',handleClickLoad);
-
-
