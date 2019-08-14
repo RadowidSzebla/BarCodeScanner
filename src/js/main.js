@@ -24,12 +24,12 @@ function handleClickLoad(){
   //console.log(input.value)
   //console.log(image.src)
   if (input.value == "lm") {
-    image.src="/assets/img/logoLM.jpg"
+    image.src="assets/img/logoLM.jpg"
   }
   else if (input.value == "piws") {
-    image.src="/assets/img/logoPiws.jpg"
+    image.src="assets/img/logoPiws.jpg"
   }
-  else {image.src="/assets/img/no-pictures.svg"}
+  else {image.src="assets/img/no-pictures.svg"}
 }
 buttonLoad.addEventListener('click',handleClickLoad);
 
