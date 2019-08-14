@@ -16,7 +16,21 @@ if ('serviceWorker' in navigator) {
 
 // place your code below
 
+const input = document.querySelector('.input--js');
+const image = document.querySelector('.image--js')
 
-console.log(`Hello world!`);
+const buttonLoad = document.querySelector('.buttonLoad--js');
+function handleClickLoad(){
+  //console.log(input.value)
+  //console.log(image.src)
+  if (input.value == "lm") {
+    image.src="../assets/img/logoLM.jpg"
+  }
+  else if (input.value == "piws") {
+    image.src="../assets/img/logoPiws.jpg"
+  }
+  else {image.src="../assets/img/no-pictures.svg"}
+}
+buttonLoad.addEventListener('click',handleClickLoad);
 
 

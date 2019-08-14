@@ -11,6 +11,16 @@ html {
 }
 
 body {
-  color: $yellow;
-  background: $violet;
+  padding: 20px;
+  //color: $yellow;
+  //background: $violet;
+}
+
+.image {
+  margin: 20px 0px;
+  padding: 5px;
+  border:2px solid black;
+  min-width: 400px;
+  min-height: 400px;
+  max-width: 600px;
 }
