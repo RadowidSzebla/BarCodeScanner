@@ -1,12 +1,12 @@
 {
-  "name": "WTF: PWA",
-  "short_name": "WTF: PWA",
+  "name": "PiWS Viewer",
+  "short_name": "PiWS Viewer",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
   "orientation": "portrait",
-  "scope": "/wtf-gulp-starter/",
-  "start_url": "/wtf-gulp-starter/",
+  "scope": "/PIWSViewer/",
+  "start_url": "/PIWSViewer/",
   "icons": [
     {
       "src": "assets/pwa/icons/icon-72x72.png",
