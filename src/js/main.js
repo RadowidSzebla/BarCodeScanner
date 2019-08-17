@@ -41,3 +41,22 @@ function handleClickLoad(){
   }
 }
 buttonLoad.addEventListener('click',handleClickLoad);
+
+console.log(navigator.mediaDevices);
+console.log(navigator.mediaDevices.getUserMedia);
+/*window.addEventListener('DOMContentLoaded', function ()
+{
+  if (!('mediaDevices' in navigator &&
+      'getUserMedia' in navigator.mediaDevices &&
+      'Worker' in window)) {
+      alert('Sorry, your browser is not compatible with this app.');
+      return;
+  }
+
+  // html elements
+  //const snapshotCanvas = document.getElementById('snapshot');
+  //const snapshotContext = snapshotCanvas.getContext('2d');
+  const video = document.getElementById('camera');
+  //const overlay = document.getElementById('snapshotLimitOverlay');
+}
+*/
