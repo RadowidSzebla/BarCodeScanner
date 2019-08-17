@@ -53,6 +53,7 @@ function loadQuagga() {
       console.log("Initialization finished. Ready to start");
       //Quagga.initialized = true;
       Quagga.start();
+      input.value = "";
   });
   
   
@@ -63,6 +64,7 @@ function loadQuagga() {
       var last_code = result.codeResult.code;
       console.log("last_code: " + last_code);
       last_result.push(last_code);
+      input.value = input.value +1;
       if (last_result.length>20){
         var code = order_by_occurrence(last_result)[0];
         Quagga.stop();
