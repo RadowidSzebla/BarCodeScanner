@@ -68,6 +68,7 @@ function loadQuagga() {
         Quagga.stop();
         stopVideoStream();
         console.log("final code: " + code);
+        input.value = code;
       }
     });
   //}
