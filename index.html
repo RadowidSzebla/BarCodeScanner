@@ -29,15 +29,19 @@
         <label for="referencja">referencja:</label>
         <input class="input--js" name="referencja" id="referencja" type=text placeholder="wpisz referencje">
         <button class="buttonLoad--js">wczytaj rysunek</button>
-        <button class="buttonFlipCamera--js">zmień kamerę</button>
       </div>
-
+      <div class="camera-menu">
+        <button class="buttonStartCamera--js">włącz kamerę</button>
+        <button class="buttonStopCamera--js">zatrzymaj kamerę</button>
+        <button class="buttonFlipCamera buttonFlipCamera--js">zmień kamerę</button>
+      </div>
       <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-      <video class="video" id="camera" autoplay>You need a camera in order to use this app.</video>
+      <video class="video" id="video" autoplay=true>You need a camera in order to use this app.</video>
       
       <img class="image image--js" src="assets/img/logoPiws.jpg" alt="rysunek elementu">
       <p class="image__label--js"></p>
     </main>
     <script src="js/main.js"></script>
+    <footer></footer>
   </body>
 </html>
