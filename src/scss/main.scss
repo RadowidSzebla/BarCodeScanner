@@ -16,6 +16,10 @@ body {
   //background: $violet;
 }
 
+.camera-menu{
+  margin: 10px 0;
+}
+
 main {
   //background: blue;
   display: flex;
@@ -31,22 +35,18 @@ main {
   max-width: 600px;
 }
 
-.camera {
-  border:2px solid black;
-  position: fixed;
-  top: 50%;
-  left: 50%;
+.video {
+  //border:2px solid black;
+  //position: fixed;
+  //top: 50%;
+  //left: 50%;
 
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
+  //min-width: 100%;
+  //min-height: 100%;
+  //width: auto;
+  //height: auto;
 
   //z-index: -100;
 
-  transform: translateX(-50%) translateY(-50%);
-}
-
-.mdl-dialog__content {
-  text-align: center;
+  //transform: translateX(-50%) translateY(-50%);
 }

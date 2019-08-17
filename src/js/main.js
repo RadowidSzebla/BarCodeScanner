@@ -16,14 +16,70 @@ if ('serviceWorker' in navigator) {
 
 // place your code below
 
+import Quagga from './quagga';
+
+var last_result = [];
+var counts = {};
+
+function order_by_occurrence(arr) {
+  counts = {};
+  arr.forEach(function(value){
+    if(!counts[value]) {
+      counts[value]=0;
+    }
+    counts[value]++;
+  });
+
+  return Object.keys(counts).sort(function(curKey,nextKey) {
+    return counts[curKey] < counts[nextKey];
+  });
+}
+
+function loadQuagga() {
+  Quagga.init({
+    inputStream : {
+      name : "Live",
+      type : "LiveStream",
+      target: document.querySelector('video')    // Or '#yourElement' (optional)
+    },
+    decoder : {
+      readers : ["code_128_reader","ean_reader"]
+    }
+  }, function(err) {
+      if (err) {
+          console.log(err);
+          return
+      }
+      console.log("Initialization finished. Ready to start");
+      //Quagga.initialized = true;
+      Quagga.start();
+  });
+  
+  
+  last_result = [];
+  console.log(last_result);
+  //if (Quagga.initialized == undefined) {
+    Quagga.onDetected(function(result) {
+      var last_code = result.codeResult.code;
+      console.log("last_code: " + last_code);
+      last_result.push(last_code);
+      if (last_result.length>20){
+        var code = order_by_occurrence(last_result)[0];
+        Quagga.stop();
+        stopVideoStream();
+        console.log("final code: " + code);
+      }
+    });
+  //}
+}
+
+
 const input = document.querySelector('.input--js');
 const image = document.querySelector('.image--js');
 const label = document.querySelector('.image__label--js');
 const buttonLoad = document.querySelector('.buttonLoad--js');
 
 function handleClickLoad(){
-  //console.log(input.value)
-  //console.log(image.src)
   if (input.value!=""){
     if (input.value == "lm") {
       image.src = "assets/img/logoLM.jpg"
@@ -44,19 +100,75 @@ buttonLoad.addEventListener('click',handleClickLoad);
 
 console.log(navigator.mediaDevices);
 console.log(navigator.mediaDevices.getUserMedia);
-/*window.addEventListener('DOMContentLoaded', function ()
-{
-  if (!('mediaDevices' in navigator &&
-      'getUserMedia' in navigator.mediaDevices &&
-      'Worker' in window)) {
-      alert('Sorry, your browser is not compatible with this app.');
-      return;
-  }
+const constraints = {
+  audio: false,
+  video: true
+};
 
-  // html elements
-  //const snapshotCanvas = document.getElementById('snapshot');
-  //const snapshotContext = snapshotCanvas.getContext('2d');
-  const video = document.getElementById('camera');
-  //const overlay = document.getElementById('snapshotLimitOverlay');
+//const video = document.querySelector('video');
+//navigator.mediaDevices.getUserMedia(constraints).
+//then((stream) => {video.srcObject = stream});
+const buttonStartCamera = document.querySelector('.buttonStartCamera--js');
+const buttonStopCamera = document.querySelector('.buttonStopCamera--js');
+const buttonFlipCamera = document.querySelector('.buttonFlipCamera--js');
+
+buttonStartCamera.addEventListener('click', function() {
+  startVideoStream();
+  loadQuagga();
+  }
+);
+
+buttonStopCamera.addEventListener('click', function() {
+  Quagga.stop();
+  stopVideoStream();
+  }
+);
+
+const video = document.querySelector('video');
+
+// init video stream
+let currentDeviceId;
+function startVideoStream () {
+    let config = {
+        audio: false,
+        video: {}
+    };
+    config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
+    stopVideoStream();
+    navigator.mediaDevices.getUserMedia(config).then(function (stream) {
+       video.srcObject = stream;
+    }).catch(function (error) {
+      alert(error.name + ": " + error.message);
+    });
 }
-*/
+
+function stopVideoStream() {
+    if (video.srcObject) {
+        video.srcObject.getTracks()[0].stop();
+    }
+}
+
+buttonFlipCamera.disabled = true;
+//console.log("buttonFlipCamera " + navigator.mediaDevices.enumerateDevices());
+navigator.mediaDevices.enumerateDevices()
+.then(function(devices) {
+  devices = devices.filter(function (device) {
+      return device.kind === 'videoinput';
+  });
+  
+  if (devices.length > 1) {
+    buttonFlipCamera.disabled = false;
+    currentDeviceId = devices[0].deviceId;
+    buttonFlipCamera.addEventListener('click', function() {
+      let targetDevice;
+      for (let i = 0; i < devices.length; i++) {
+        if (devices[i].deviceId === currentDeviceId) {
+          targetDevice = (i + 1 < devices.length) ? devices[i+1] : devices[0];
+          break;
+        }
+      }
+      currentDeviceId = targetDevice.deviceId;
+      startVideoStream();
+    });
+  }
+});

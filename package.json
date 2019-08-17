@@ -48,5 +48,8 @@
       "@babel/preset-env"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "gulp-concat": "^2.6.1",
+    "quagga": "^0.12.1"
+  }
 }
