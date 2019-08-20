@@ -318,8 +318,24 @@ html {
 body {
   padding: 20px; }
 
+.buttonFlipCamera {
+  display: none; }
+
+.buttonStopCamera {
+  display: none; }
+
 .camera-menu {
-  margin: 10px 0; }
+  margin: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
 
 main {
   display: -webkit-box;
@@ -334,11 +350,19 @@ main {
           align-items: center; }
 
 .image {
+  display: none;
   margin: 20px 0px;
   padding: 5px;
   border: 2px solid black;
   min-width: 400px;
   min-height: 400px;
   max-width: 600px; }
+
+.camera {
+  display: none;
+  margin: 20px; }
+
+.PDF__object {
+  display: none; }
 
 /*# sourceMappingURL=main.css.map */
