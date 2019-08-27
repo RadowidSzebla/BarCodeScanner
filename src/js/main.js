@@ -16,7 +16,9 @@ if ('serviceWorker' in navigator) {
 
 // place your code below
 
-import Quagga from './quagga';
+var KatalogJson = require('.././assets/json/Test.json');
+
+var Quagga = require("quagga");
 
 var last_result = [];
 var counts = {};
@@ -40,7 +42,7 @@ function loadQuagga() {
     inputStream : {
       name : "Live",
       type : "LiveStream",
-      target: document.querySelector('video')    // Or '#yourElement' (optional)
+      target: camera    // Or '#yourElement' (optional)
     },
     decoder : {
       readers : ["code_128_reader","ean_reader"]
@@ -58,7 +60,7 @@ function loadQuagga() {
   
   
   last_result = [];
-  console.log(last_result);
+  //console.log(last_result);
   //if (Quagga.initialized == undefined) {
     Quagga.onDetected(function(result) {
       var last_code = result.codeResult.code;
@@ -76,21 +78,35 @@ function loadQuagga() {
   //}
 }
 
-
 const input = document.querySelector('.input--js');
 const image = document.querySelector('.image--js');
+const PdfObject = document.querySelector('.PDF__object--js');
+const PdfEmbed = document.querySelector('.PDF__embed--js');
 const label = document.querySelector('.image__label--js');
 const buttonLoad = document.querySelector('.buttonLoad--js');
+var path = "";
 
 function handleClickLoad(){
   if (input.value!=""){
-    if (input.value == "lm") {
-      image.src = "assets/img/logoLM.jpg"
-      label.innerHTML = input.value;
-    }
-    else if (input.value == "piws") {
-      image.src = "assets/img/logoPiws.jpg"
-      label.innerHTML = input.value;
+    if (KatalogJson.hasOwnProperty(input.value)){
+        path = './assets/img/katalog/' + KatalogJson[input.value];
+        //console.log("path: " + path);
+        var extension = path.substring(path.length-3).toUpperCase();
+        if (extension == "JPG"){
+        try{
+          PdfObject.style.display='none';
+          image.src = path;
+          image.style.display='block';
+        }
+        catch (err){console.log('no file: ' + path);}
+        }
+        else if (extension == "PDF"){
+          image.style.display='none';
+          PdfObject.data = path;
+          PdfEmbed.src= path;
+          PdfObject.style.display='block';
+        }
+        label.innerHTML = input.value +" (" + KatalogJson[input.value] + ")";
     }
     else {
       image.src = "assets/img/no-pictures.svg"
@@ -101,16 +117,9 @@ function handleClickLoad(){
 }
 buttonLoad.addEventListener('click',handleClickLoad);
 
-console.log(navigator.mediaDevices);
-console.log(navigator.mediaDevices.getUserMedia);
-const constraints = {
-  audio: false,
-  video: true
-};
+//console.log(navigator.mediaDevices);
+//console.log(navigator.mediaDevices.getUserMedia);
 
-//const video = document.querySelector('video');
-//navigator.mediaDevices.getUserMedia(constraints).
-//then((stream) => {video.srcObject = stream});
 const buttonStartCamera = document.querySelector('.buttonStartCamera--js');
 const buttonStopCamera = document.querySelector('.buttonStopCamera--js');
 const buttonFlipCamera = document.querySelector('.buttonFlipCamera--js');
@@ -127,7 +136,7 @@ buttonStopCamera.addEventListener('click', function() {
   }
 );
 
-const video = document.querySelector('video');
+const camera = document.querySelector('.camera--js');
 
 // init video stream
 let currentDeviceId;
@@ -139,15 +148,24 @@ function startVideoStream () {
     config.video = currentDeviceId ? {deviceId: currentDeviceId} : {facingMode: "environment"};
     stopVideoStream();
     navigator.mediaDevices.getUserMedia(config).then(function (stream) {
-       video.srcObject = stream;
+      camera.srcObject = stream;
+      camera.style.display = 'block';
+      buttonFlipCamera.style.display = "block";
+      buttonStopCamera.style.display = "block";
+      buttonStartCamera.style.display = "none";
     }).catch(function (error) {
       alert(error.name + ": " + error.message);
     });
+    
 }
 
 function stopVideoStream() {
-    if (video.srcObject) {
-        video.srcObject.getTracks()[0].stop();
+    camera.style.display = 'none';
+    buttonFlipCamera.style.display = "none";
+    buttonStopCamera.style.display = "none";
+    buttonStartCamera.style.display = "block";
+    if (camera.srcObject) {
+        camera.srcObject.getTracks()[0].stop();
     }
 }
 

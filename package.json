@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maciejkorsan/wtf-gulp-starter.git"
+    "url": "git+https://github.com/radowidszebla/BarCodeScanner.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maciejkorsan/wtf-gulp-starter/issues"
+    "url": "https://github.com/radowidszebla/BarCodeScanner/issues"
   },
-  "homepage": "https://github.com/maciejkorsan/wtf-gulp-starter#readme",
+  "homepage": "https://github.com/radowidszebla/BarCodeScanner#readme",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "gulp-concat": "^2.6.1",
+    "paths-exist": "^0.2.4",
     "quagga": "^0.12.1"
   }
 }

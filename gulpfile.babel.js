@@ -9,7 +9,6 @@ import sourcemaps from "gulp-sourcemaps";
 import notify from "gulp-notify";
 import plumber from "gulp-plumber";
 import webpack from "webpack-stream";
-import concat from "gulp-concat"
 
 sass.compiler = require("node-sass");
 
@@ -37,14 +36,6 @@ gulp.task("pwa", function() {
     .pipe(gulp.dest("./dist/"));
 });
 
-/////////////////////////////////////////////////////////////////
-gulp.task("concat", function() {
-  return gulp
-  .src('src/js/*.js')
-  .pipe(concat('main.js'))
-  .pipe(gulp.dest('dist/js')) 
-});
-
 gulp.task("js", function() {
   return gulp.src('src/js')
   .pipe(
@@ -60,7 +51,7 @@ gulp.task("js", function() {
   .pipe(webpack(require('./webpack.config.js')))
   .pipe(gulp.dest('dist/js'));
 });
-/////////////////////////////////////////////////////////////////////
+
 gulp.task("sass", () => {
   return gulp
     .src("./src/scss/main.scss")
