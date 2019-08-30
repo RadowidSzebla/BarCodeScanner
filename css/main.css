@@ -337,6 +337,9 @@ body {
       -ms-flex-pack: center;
           justify-content: center; }
 
+h1 {
+  margin: 10px; }
+
 main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -354,15 +357,16 @@ main {
   margin: 20px 0px;
   padding: 5px;
   border: 2px solid black;
-  min-width: 400px;
-  min-height: 400px;
-  max-width: 600px; }
+  width: auto;
+  height: 75vh; }
+
+.PDF__object {
+  display: none;
+  width: 120vh;
+  height: 75vh; }
 
 .camera {
   display: none;
   margin: 20px; }
-
-.PDF__object {
-  display: none; }
 
 /*# sourceMappingURL=main.css.map */
