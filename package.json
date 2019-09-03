@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/radowidszebla/BarCodeScanner.git"
+    "url": "git+https://github.com/radowidszebla/RackPartsViewerLM.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/radowidszebla/BarCodeScanner/issues"
+    "url": "https://github.com/radowidszebla/RackPartsViewerLM/issues"
   },
-  "homepage": "https://github.com/radowidszebla/BarCodeScanner#readme",
+  "homepage": "https://github.com/radowidszebla/RackPartsViewerLM#readme",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
