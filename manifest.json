@@ -1,6 +1,6 @@
 {
-  "name": "BarCodeScanner",
-  "short_name": "BarCodeScanner",
+  "name": "RackPartsViewerLM",
+  "short_name": "RackPartsViewerLM",
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
